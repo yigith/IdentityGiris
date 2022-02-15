@@ -1,0 +1,28 @@
+﻿@using IdentityGiris.Data
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> userManager
+@{
+    ViewData["Title"] = "Home Page";
+    var user = await userManager.GetUserAsync(User); // ilgili kullanıcının bilgilerini db'den getir
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+<div class="text-center mb-3">
+    @if (!string.IsNullOrEmpty(user.DisplayName))
+    {
+        <text>Hoşgeldin @user.DisplayName <br /></text>
+    }
+    else
+    {
+        <text>Hoşgeldin @User.Identity.Name <br /></text>
+    }
+    <img src="~/img/komik.gif" alt="Funny Gif" />
+</div>
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
